@@ -1,0 +1,85 @@
+{
+  "name": "RiTiVerse",
+  "shortName": "RiTiVerse",
+  "tagline": "Gujarat's First Queer-Led Heritage Cafe & Cultural Space",
+  "secondaryTagline": "Where Heritage, Inclusion & Flavour Bloom.",
+  "description": "Experience warm hospitality, heritage architecture, and delicious homestyle cuisine at RiTiVerse, Vadodara, Gujarat.",
+  "foundedYear": "2023",
+  "city": "Vadodara, Gujarat",
+  "currency": "₹",
+  "phone": "+91 82003 06871",
+  "phoneDisplay": "+91 82003 06871",
+  "phoneRaw": "+918200306871",
+  "email": "hello@ritiverse.in",
+  "whatsappNumber": "918200306871",
+  "whatsappDefaultMessage": "Hello RiTiVerse, I would like to reserve a table / enquire about visits & events.",
+  "orderWhatsAppMessage": "Hello RiTiVerse, I would like to order fresh food for takeout.",
+  "address": {
+    "name": "RiTiVerse",
+    "line1": "Vadodara",
+    "line2": "Gujarat",
+    "city": "Vadodara",
+    "state": "Gujarat",
+    "postalCode": "390001",
+    "country": "India",
+    "full": "Vadodara, Gujarat"
+  },
+  "coordinates": {
+    "lat": 22.307159,
+    "lng": 73.181219
+  },
+  "googleMapsUrl": "https://maps.google.com/?q=Vadodara,+Gujarat",
+  "googleMapsEmbedUrl": "https://maps.google.com/maps?q=Vadodara,%20Gujarat&t=&z=13&ie=UTF8&iwloc=&output=embed",
+  "googleReviewUrl": "https://maps.google.com/?q=Vadodara,+Gujarat",
+  "hours": {
+    "display": "Open Daily · 11:00 AM – 10:30 PM",
+    "openTime": "11:00",
+    "closeTime": "22:30",
+    "days": "Monday – Sunday",
+    "schemaDays": "Mo-Su 11:00-22:30",
+    "schedule": [
+      { "day": "Monday", "open": "11:00 AM", "close": "10:30 PM", "openHour": 11, "closeHour": 22.5 },
+      { "day": "Tuesday", "open": "11:00 AM", "close": "10:30 PM", "openHour": 11, "closeHour": 22.5 },
+      { "day": "Wednesday", "open": "11:00 AM", "close": "10:30 PM", "openHour": 11, "closeHour": 22.5 },
+      { "day": "Thursday", "open": "11:00 AM", "close": "10:30 PM", "openHour": 11, "closeHour": 22.5 },
+      { "day": "Friday", "open": "11:00 AM", "close": "10:30 PM", "openHour": 11, "closeHour": 22.5 },
+      { "day": "Saturday", "open": "11:00 AM", "close": "10:30 PM", "openHour": 11, "closeHour": 22.5 },
+      { "day": "Sunday", "open": "11:00 AM", "close": "10:30 PM", "openHour": 11, "closeHour": 22.5 }
+    ]
+  },
+  "links": {
+    "instagram": "https://www.instagram.com/ritiverse/",
+    "facebook": "https://www.facebook.com/ritiverse",
+    "zomato": "https://www.zomato.com/vadodara",
+    "swiggy": "https://www.swiggy.com/city/vadodara",
+    "menuPdf": "#menu-download"
+  },
+  "story": {
+    "eyebrow": "HERITAGE MEETS INCLUSION",
+    "heading": "Heritage Sanctuary in Vadodara, Gujarat",
+    "paragraph1": "Nestled in Vadodara, Gujarat, RiTiVerse is celebrated as a vibrant dining space and cultural hub, born out of a shared vision of dignity, artistic expression, and radical love.",
+    "paragraph2": "Located in Vadodara, Gujarat, RiTiVerse blends soulful homestyle dishes, fragrant beverages, and artisanal coffees in a lush open-air garden and tranquil setting.",
+    "quote": "A safe, beautiful table where everyone belongs and authentic flavours flourish in Vadodara."
+  },
+  "qualityIngredients": {
+    "eyebrow": "HOMESTYLE HERITAGE & FRESH CRAFT",
+    "heading": "Prepared With Love, Heritage & Pure Ingredients",
+    "paragraph": "From our fragrant Mogra Shikanji and slow-steeped filter coffees to hand-rolled theplas, authentic Maharashtrian misal, and artisanal cafe plates, every dish is prepared with homestyle care, dignity, and farm-fresh regional produce.",
+    "stats": [
+      { "value": "100%", "label": "Inclusive & Safe Space" },
+      { "value": "Fresh", "label": "Farm-to-Kitchen Produce" },
+      { "value": "Pure", "label": "Homestyle Heritage Recipes" }
+    ]
+  },
+  "events": {
+    "eyebrow": "GATHER & CELEBRATE",
+    "heading": "Cultural Gatherings & Soulful Evenings at RiTiVerse",
+    "subheading": "Whether it is an acoustic live session, an inclusive community circle, an art exhibition, a poetry reading, or an intimate birthday celebration in Vadodara, Gujarat, RiTiVerse creates unforgettable moments in a warm, welcoming atmosphere.",
+    "features": [
+      "Customized homestyle Gujarati, Maharashtrian & Cafe menus",
+      "Warm community hospitality & open courtyard aesthetics",
+      "Serene garden and heritage brick seating for up to 60 guests",
+      "Acoustic audio setup for poetry, art exhibitions & social meets"
+    ]
+  }
+}

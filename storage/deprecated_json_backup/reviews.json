@@ -1,0 +1,52 @@
+{
+  "averageRating": 4.8,
+  "totalReviewsCount": "680+",
+  "googleReviewLink": "https://maps.google.com/?q=Vadodara,+Gujarat",
+  "reviews": [
+    {
+      "id": "rev-1",
+      "author": "Harshil Dave",
+      "badge": "Local Guide · Vadodara",
+      "rating": 5,
+      "date": "2 weeks ago",
+      "text": "Such a peaceful and heartwarming cafe in Vadodara, Gujarat! The vibe is so serene, welcoming, and artistic. Must try their cold brew, filter coffee, and delicious snacks!",
+      "dishMentioned": "Artisan Cold Brew & Thepla Nachos"
+    },
+    {
+      "id": "rev-2",
+      "author": "Ananya Parikh",
+      "badge": "Food Enthusiast",
+      "rating": 5,
+      "date": "1 month ago",
+      "text": "An incredible culinary initiative in Vadodara! The hospitality is so tender and respectful. The open-air seating makes you feel like you are in an unhurried sanctuary. Loved the Misal Pav and Mogra Shikanji.",
+      "dishMentioned": "Homestyle Misal Pav & Mogra Shikanji"
+    },
+    {
+      "id": "rev-3",
+      "author": "Dr. Neil Varma",
+      "badge": "Vadodara Resident",
+      "rating": 5,
+      "date": "3 weeks ago",
+      "text": "What a gem in Vadodara, Gujarat! Peaceful atmosphere, clean courtyard, and lovely books to read. The staff is courteous and warm. Perfect place to relax with great coffee.",
+      "dishMentioned": "Specialty Chai & Cheese Toast"
+    },
+    {
+      "id": "rev-4",
+      "author": "Riddhi Kothari",
+      "badge": "Local Guide",
+      "rating": 5,
+      "date": "A month ago",
+      "text": "Thepla Nachos, homestyle Gujarati-Maharashtrian snacks, and great artisanal coffee. It is not just a cafe, it is a cultural movement of warmth and dignity. Highly recommended to everyone in Vadodara, Gujarat!",
+      "dishMentioned": "Thepla Nachos & Artisan Flat White"
+    },
+    {
+      "id": "rev-5",
+      "author": "Shreya Joshi",
+      "badge": "Verified Diner",
+      "rating": 5,
+      "date": "2 months ago",
+      "text": "A serene aesthetic space with soul in Vadodara. Beautiful plants, lovely ambient music, and hearty comforting food. It is our favourite weekend spot to unwind.",
+      "dishMentioned": "Puran Poli Platter & Filter Coffee"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<?php
+/**
+ * RiTiVerse Cafe - Dedicated Events & Celebrations Page
+ */
+require_once dirname(__DIR__) . '/includes/config.php';
+
+$pageTitle = "Private Events & Cultural Gatherings | RiTiVerse Cafe, Vadodara, Gujarat";
+$pageDesc = "Host your birthdays, community meetups, acoustic live evenings, and family gatherings at RiTiVerse Cafe, Vadodara, Gujarat. Beautiful welcoming courtyard setting.";
+$pageCss = ['events.css'];
+$pageJs = [];
+
+require dirname(__DIR__) . '/includes/header.php';
+?>
+
+<main id="main-content" style="padding-top: 5rem;">
+  <!-- Events Hero Banner -->
+  <section class="subpage-hero-banner">
+    <div class="container">
+      <span class="eyebrow" style="color: var(--accent-sky);">CELEBRATE &amp; GATHER AT RiTiVerse</span>
+      <h1 class="subpage-hero-title">
+        Cultural Events &amp; Intimate Gatherings
+      </h1>
+      <p class="subpage-hero-subtitle">
+        From heartfelt birthday celebrations and community meetups to poetry readings, book club meets, and acoustic musical evenings in Vadodara, Gujarat.
+      </p>
+    </div>
+  </section>
+
+  <!-- Events Promo Section -->
+  <section id="events" class="events-section">
+    <div class="container">
+      <div class="events-grid">
+        <div class="events-col-left events-content">
+          <div class="events-eyebrow-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-sky);">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+            </svg>
+            <span class="eyebrow"><?= e($business['events']['eyebrow']) ?></span>
+          </div>
+
+          <h2 class="events-heading">
+            <?= e($business['events']['heading']) ?>
+          </h2>
+
+          <p class="events-desc">
+            <?= e($business['events']['subheading']) ?>
+          </p>
+
+          <div class="events-features-grid">
+            <?php foreach ($business['events']['features'] as $feature): ?>
+              <div class="events-feature-item">
+                <svg class="events-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+                <span class="events-feature-text"><?= e($feature) ?></span>
+              </div>
+            <?php endforeach; ?>
+          </div>
+
+          <div class="events-actions">
+            <a href="https://wa.me/<?= e($business['whatsappNumber']) ?>?text=<?= urlencode("Hello RiTiVerse Cafe! I would like to enquire about hosting a private event / birthday / community gathering.") ?>" target="_blank" rel="noopener noreferrer" class="btn-terracotta" style="font-size: 0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
+                <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/>
+              </svg>
+              Enquire on WhatsApp
+            </a>
+            <span class="events-footnote">Personalized party packages start from 10 guests. Instant date checking.</span>
+          </div>
+        </div>
+
+        <div class="events-col-right">
+          <div class="events-composition">
+            <div class="events-img-primary image-zoom-container">
+              <img src="assets/images/cafe/hero-table.jpg" alt="Celebration Table Spread at RiTiVerse Cafe">
+            </div>
+            <div class="events-img-secondary image-zoom-container">
+              <img src="assets/images/cafe/menu-cover-spaghetti.jpg" alt="RiTiVerse Cafe Signature Homestyle Spread and Delicacies">
+            </div>
+            <div class="events-booking-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
+              </svg>
+              Private Booking
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<?php require dirname(__DIR__) . '/includes/footer.php'; ?>

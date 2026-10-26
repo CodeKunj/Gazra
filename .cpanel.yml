@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/ritivers/RiTiVerse.ritiverse.in/
+    - /bin/cp * $DEPLOYPATH

@@ -1,0 +1,462 @@
+/**
+ * RiTiVerse Cafe - Patron Club & Profile Hub Styling
+ * Mobile-first responsive architecture for OTP login, rewards wallet, and order receipts.
+ */
+
+:root {
+  --prf-bg: var(--bg-cream, #F7F4EE);
+  --prf-espresso: var(--text-espresso, #1A1412);
+  --prf-terracotta: var(--accent-terracotta, #C96A52);
+  --prf-sky: var(--accent-sky, #6B9AC4);
+  --prf-muted: var(--text-muted, #6E6259);
+  --prf-card-bg: #FFFFFF;
+  --prf-border: rgba(26, 20, 18, 0.09);
+  --prf-shadow: 0 10px 30px rgba(26, 20, 18, 0.04);
+  --prf-radius: 20px;
+}
+
+.profile-main {
+  padding-top: clamp(4.75rem, 8vw, 6rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+  min-height: 85vh;
+  min-height: 85dvh;
+  background-color: var(--prf-bg);
+  box-sizing: border-box;
+}
+
+.profile-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1rem 0.85rem;
+}
+
+@media (min-width: 480px) {
+  .profile-container {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile-container {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   LOGGED-OUT: OTP AUTH SPLIT CARD
+   ========================================================================== */
+.patron-auth-card {
+  background: var(--prf-card-bg);
+  border-radius: var(--prf-radius);
+  border: 1px solid var(--prf-border);
+  box-shadow: 0 15px 40px rgba(26, 20, 18, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .patron-auth-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 24px;
+  }
+}
+
+/* Auth Perks Pitch (Dark Side) */
+.auth-pitch-side {
+  background: linear-gradient(135deg, #1A1412 0%, #2A221F 100%);
+  color: #F7F4EE;
+  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 480px) {
+  .auth-pitch-side {
+    padding: 2.5rem 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .auth-pitch-side {
+    padding: 3rem 2.25rem;
+  }
+}
+
+.auth-club-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(201, 106, 82, 0.2);
+  color: var(--prf-terracotta);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.auth-pitch-title {
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-size: clamp(1.6rem, 5vw, 2.25rem);
+  line-height: 1.2;
+  margin: 0 0 0.85rem;
+  color: #FFFFFF;
+}
+
+.auth-pitch-desc {
+  color: rgba(247, 244, 238, 0.75);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0 0 2rem;
+}
+
+.auth-perks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.auth-perk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.auth-perk-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.auth-perk-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+  color: #FFFFFF;
+}
+
+.auth-perk-text {
+  font-size: 0.8rem;
+  color: rgba(247, 244, 238, 0.65);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.auth-pitch-footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(247, 244, 238, 0.1);
+  font-size: 0.78rem;
+  color: rgba(247, 244, 238, 0.5);
+}
+
+/* Auth Form Side */
+.auth-form-side {
+  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #FFFFFF;
+}
+
+@media (min-width: 480px) {
+  .auth-form-side {
+    padding: 2.5rem 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .auth-form-side {
+    padding: 3rem 2.25rem;
+  }
+}
+
+.auth-form-title {
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  color: var(--prf-espresso);
+  margin: 0 0 0.4rem;
+}
+
+.auth-form-desc {
+  color: var(--prf-muted);
+  font-size: 0.88rem;
+  margin: 0 0 1.5rem;
+  line-height: 1.45;
+}
+
+.auth-otp-input {
+  width: 100%;
+  border: 1.5px solid rgba(26, 20, 18, 0.2);
+  border-radius: 12px;
+  padding: 0.85rem 0.5rem;
+  font-size: clamp(1.3rem, 5vw, 1.6rem);
+  letter-spacing: clamp(0.12em, 2vw, 0.28em);
+  text-align: center;
+  font-weight: 700;
+  color: var(--prf-espresso);
+  outline: none;
+  box-sizing: border-box;
+  min-height: 52px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-otp-input:focus {
+  border-color: var(--prf-terracotta);
+  box-shadow: 0 0 0 3px rgba(201, 106, 82, 0.15);
+}
+
+/* ==========================================================================
+   LOGGED-IN: PATRON PROFILE COMMAND HUB
+   ========================================================================== */
+.patron-profile-card {
+  background: var(--prf-card-bg);
+  border-radius: var(--prf-radius);
+  border: 1px solid var(--prf-border);
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--prf-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .patron-profile-card {
+    padding: 1.75rem 2rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+}
+
+.patron-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patron-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--prf-espresso);
+  color: #F7F4EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-family: var(--font-display, serif);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .patron-avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 1.75rem;
+  }
+}
+
+.patron-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.patron-name-title {
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  color: var(--prf-espresso);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.patron-tier-badge {
+  display: inline-block;
+  padding: 0.18rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.patron-meta-row {
+  font-size: 0.82rem;
+  color: var(--prf-muted);
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.patron-actions-row {
+  display: flex;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .patron-actions-row {
+    width: auto;
+  }
+}
+
+.btn-patron-action {
+  flex: 1;
+  text-align: center;
+  border-radius: 9999px;
+  padding: 0.6rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+@media (min-width: 640px) {
+  .btn-patron-action {
+    flex: initial;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* 2 Key Pillars: Loyalty Points + Milestone Progress */
+.patron-pillars-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .patron-pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.patron-pillar-card {
+  border-radius: var(--prf-radius);
+  padding: 1.5rem 1.25rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .patron-pillar-card {
+    padding: 2rem;
+  }
+}
+
+/* Milestone 5-Pills Visualizer */
+.milestone-pills-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 480px) {
+  .milestone-pills-row {
+    gap: 0.5rem;
+  }
+}
+
+/* Vouchers and Coupons Grids */
+.vouchers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .vouchers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .vouchers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.voucher-card {
+  background: linear-gradient(135deg, #FFFDF9 0%, #F5EFEB 100%);
+  border-radius: 16px;
+  border: 1.5px solid rgba(201, 106, 82, 0.3);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(201, 106, 82, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.coupon-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid var(--prf-border);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(26, 20, 18, 0.02);
+}
+
+/* Past Order Receipt Cards */
+.receipt-order-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid var(--prf-border);
+  padding: 1.25rem 1rem;
+  box-shadow: 0 4px 15px rgba(26, 20, 18, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+@media (min-width: 480px) {
+  .receipt-order-card {
+    padding: 1.5rem;
+  }
+}
+
+.receipt-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(26, 20, 18, 0.06);
+  padding-bottom: 0.85rem;
+}
+
+.receipt-order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(26, 20, 18, 0.06);
+  padding-top: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
