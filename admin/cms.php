@@ -482,15 +482,13 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
     /* Studio Layout */
     .studio-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 360px;
-      gap: 2rem;
-      align-items: start;
-      min-width: 0;
+      max-width: 1060px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .form-sections {
-      min-width: 0;
+      width: 100%;
     }
 
     /* Form Section Cards */
@@ -611,125 +609,6 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       border-radius: 4px;
     }
 
-    /* Live Preview Sticky Sidebar */
-    .preview-sidebar {
-      position: sticky;
-      top: 5.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      width: 100%;
-      max-width: 360px;
-      min-width: 0;
-      box-sizing: border-box;
-    }
-
-    .preview-card {
-      background: #FFFFFF;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-warm);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .preview-header {
-      background: #1A1412;
-      color: #F7F4EE;
-      padding: 0.85rem 1.25rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-
-    .preview-body {
-      padding: 1.25rem;
-      box-sizing: border-box;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .preview-mock-hero {
-      background: radial-gradient(circle at 10% 20%, rgba(107, 154, 196, 0.12) 0%, transparent 40%), var(--bg-cream);
-      border-radius: 12px;
-      padding: 1.25rem 1rem;
-      text-align: center;
-      border: 1px dashed var(--border-warm);
-      box-sizing: border-box;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .mock-badge {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent-sky-deep);
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      display: block;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .mock-title {
-      font-family: 'Fraunces', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-espresso);
-      margin: 0;
-      line-height: 1.15;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .mock-tagline {
-      font-family: 'Fraunces', serif;
-      font-size: 1.05rem;
-      font-style: italic;
-      color: var(--accent-terracotta);
-      margin-top: 0.25rem;
-      display: block;
-      word-break: break-word;
-      overflow-wrap: break-word;
-      line-height: 1.3;
-    }
-
-    .mock-btn {
-      display: inline-block;
-      margin-top: 0.85rem;
-      background: var(--text-espresso);
-      color: #FFFFFF;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      word-break: break-word;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-
-    .preview-quote-box {
-      margin-top: 1rem;
-      padding: 0.85rem 1rem;
-      background: var(--bg-cream);
-      border-radius: 10px;
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 0.86rem;
-      color: var(--text-espresso);
-      border-left: 3px solid var(--accent-terracotta);
-      word-break: break-word;
-      overflow-wrap: break-word;
-      line-height: 1.5;
-    }
-
     /* Floating Save Bar */
     .floating-save-bar {
       position: fixed;
@@ -759,17 +638,6 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       background: #2C221F;
       transform: translateY(-2px);
       box-shadow: 0 16px 36px rgba(26, 20, 18, 0.45);
-    }
-
-    @media (max-width: 1200px) {
-      .studio-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .preview-sidebar {
-        position: static;
-        max-width: 100%;
-        margin-bottom: 2rem;
-      }
     }
 
     @media (max-width: 900px) {
@@ -874,24 +742,24 @@ if (session_status() === PHP_SESSION_ACTIVE) {
               <div class="form-grid">
                 <div class="form-group">
                   <label>Brand Main Title</label>
-                  <input type="text" id="input_hero_name" name="settings[cms_hero_name]" value="<?= e((string)($current['cms_hero_name'] ?? 'RiTiVerse')) ?>" oninput="updatePreview()">
+                  <input type="text" id="input_hero_name" name="settings[cms_hero_name]" value="<?= e((string)($current['cms_hero_name'] ?? 'RiTiVerse')) ?>">
                   <span class="help-hint">Primary Fraunces serif display heading.</span>
                 </div>
 
                 <div class="form-group">
                   <label>Brand Tagline Subtitle</label>
-                  <input type="text" id="input_hero_tagline" name="settings[cms_hero_tagline]" value="<?= e((string)($current['cms_hero_tagline'] ?? 'Heritage Cafe & Cultural Space')) ?>" oninput="updatePreview()">
+                  <input type="text" id="input_hero_tagline" name="settings[cms_hero_tagline]" value="<?= e((string)($current['cms_hero_tagline'] ?? 'Heritage Cafe & Cultural Space')) ?>">
                   <span class="help-hint">Italic second line underneath brand name.</span>
                 </div>
 
                 <div class="form-group">
                   <label>Top Accent Location Badge</label>
-                  <input type="text" id="input_hero_badge" name="settings[cms_hero_badge]" value="<?= e((string)($current['cms_hero_badge'] ?? 'Vadodara, Gujarat')) ?>" oninput="updatePreview()">
+                  <input type="text" id="input_hero_badge" name="settings[cms_hero_badge]" value="<?= e((string)($current['cms_hero_badge'] ?? 'Vadodara, Gujarat')) ?>">
                 </div>
 
                 <div class="form-group">
                   <label>Hero CTA Button Label</label>
-                  <input type="text" id="input_hero_cta" name="settings[cms_hero_cta]" value="<?= e((string)($current['cms_hero_cta'] ?? 'Explore Our Menu')) ?>" oninput="updatePreview()">
+                  <input type="text" id="input_hero_cta" name="settings[cms_hero_cta]" value="<?= e((string)($current['cms_hero_cta'] ?? 'Explore Our Menu')) ?>">
                 </div>
               </div>
             </div>
@@ -916,7 +784,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
                 <div class="form-group">
                   <label>Editorial Pull Quote</label>
-                  <textarea id="input_story_quote" name="settings[cms_story_quote]" rows="2" oninput="updatePreview()"><?= e((string)($current['cms_story_quote'] ?? 'Where warm hospitality meets authentic taste in Vadodara, Gujarat.')) ?></textarea>
+                  <textarea id="input_story_quote" name="settings[cms_story_quote]" rows="2"><?= e((string)($current['cms_story_quote'] ?? 'Where warm hospitality meets authentic taste in Vadodara, Gujarat.')) ?></textarea>
                 </div>
               </div>
             </div>
@@ -1346,32 +1214,6 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
           </div>
 
-          <!-- Right Sticky Live Preview Mockup -->
-          <div class="preview-sidebar">
-            <div class="preview-card">
-              <div class="preview-header">
-                <span>Live Website Preview</span>
-                <span style="font-size:0.65rem; color:var(--accent-sky);">Real-time</span>
-              </div>
-              <div class="preview-body">
-                <div class="preview-mock-hero">
-                  <span class="mock-badge" id="preview_badge"><?= e((string)($current['cms_hero_badge'] ?? 'Vadodara, Gujarat')) ?></span>
-                  <h3 class="mock-title" id="preview_name"><?= e((string)($current['cms_hero_name'] ?? 'RiTiVerse')) ?></h3>
-                  <span class="mock-tagline" id="preview_tagline"><?= e((string)($current['cms_hero_tagline'] ?? 'Heritage Cafe & Cultural Space')) ?></span>
-                  <span class="mock-btn" id="preview_cta"><?= e((string)($current['cms_hero_cta'] ?? 'Explore Heritage Menu')) ?></span>
-                </div>
-
-                <div class="preview-quote-box">
-                  &ldquo;<span id="preview_quote"><?= e((string)($current['cms_story_quote'] ?? 'Where unhurried coffee meets wood-fired warmth in Gujarat.')) ?></span>&rdquo;
-                </div>
-
-                <div style="margin-top:1.25rem; font-size:0.75rem; color:var(--text-muted); line-height:1.6; padding-top:1rem; border-top:1px dashed var(--border-warm);">
-                  <strong>Instant Effect:</strong> When you click save, your changes are written to the database and displayed instantly on the public website without restarting any server.
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
 
         <!-- Floating Save Bar -->
@@ -1403,20 +1245,6 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       if (input.value !== v) {
         input.value = v;
       }
-    }
-
-    function updatePreview() {
-      const name = document.getElementById('input_hero_name').value || 'RiTiVerse';
-      const tagline = document.getElementById('input_hero_tagline').value || 'Heritage Cafe & Cultural Space';
-      const badge = document.getElementById('input_hero_badge').value || 'Vadodara, Gujarat';
-      const cta = document.getElementById('input_hero_cta').value || 'Explore Heritage Menu';
-      const quote = document.getElementById('input_story_quote').value || 'A quiet sanctuary where heritage, inclusion, and soulful flavours meet.';
-
-      document.getElementById('preview_name').textContent = name;
-      document.getElementById('preview_tagline').textContent = tagline;
-      document.getElementById('preview_badge').textContent = badge;
-      document.getElementById('preview_cta').textContent = cta;
-      document.getElementById('preview_quote').textContent = quote;
     }
   </script>
 
