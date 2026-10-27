@@ -172,6 +172,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
       position: sticky;
       top: 0;
       z-index: 900;
@@ -221,6 +223,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       padding: 2.25rem 2.5rem 6rem;
       max-width: 1440px;
       width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      margin: 0 auto;
     }
 
     /* Quick Jump Navigation Pill Bar */
@@ -287,7 +292,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     /* Two-Column Studio Layout */
     .studio-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 420px;
+      grid-template-columns: minmax(0, 1fr) 380px;
       gap: 2rem;
       align-items: start;
       min-width: 0;
@@ -295,6 +300,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
     .form-sections {
       min-width: 0;
+      width: 100%;
     }
 
     /* Studio Card */
@@ -306,6 +312,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       padding: 2.25rem;
       margin-bottom: 2rem;
       transition: all 0.2s ease;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .seo-card:hover {
@@ -354,18 +362,20 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     /* Form Fields Grid */
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.35rem 1.5rem;
+      min-width: 0;
     }
 
     .form-grid.single-col {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      min-width: 0;
     }
 
     .form-group.full-width {
@@ -379,6 +389,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      word-break: break-word;
+      gap: 0.5rem;
     }
 
     .form-group input[type="text"],
@@ -386,6 +398,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     .form-group select,
     .form-group textarea {
       width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       padding: 0.8rem 1rem;
       border: 1px solid var(--border-warm);
       border-radius: 10px;
@@ -394,6 +408,10 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       font-family: inherit;
       font-size: 0.92rem;
       transition: all 0.2s ease;
+    }
+
+    .form-group select {
+      text-overflow: ellipsis;
     }
 
     .form-group input:focus,
@@ -409,6 +427,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       font-size: 0.76rem;
       color: var(--text-muted);
       line-height: 1.45;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .help-hint code {
@@ -417,6 +437,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       border-radius: 4px;
       font-family: monospace;
       color: var(--accent-terracotta);
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      white-space: normal;
     }
 
     /* Integration Cards */
@@ -429,6 +452,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       flex-direction: column;
       gap: 0.65rem;
       transition: all 0.2s ease;
+      min-width: 0;
+      box-sizing: border-box;
+      word-break: break-word;
     }
 
     .integration-box:hover {
@@ -457,6 +483,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       align-items: center;
       justify-content: space-between;
       margin-bottom: 0.25rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .integration-badge {
@@ -481,6 +509,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       margin-bottom: 0.85rem;
       overflow: hidden;
       transition: all 0.2s ease;
+      box-sizing: border-box;
     }
 
     .page-accordion-item:hover {
@@ -501,6 +530,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       background: #FAFAF7;
       user-select: none;
       transition: background 0.15s ease;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     .page-accordion-header:hover {
@@ -514,6 +545,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
     .page-path-pill {
@@ -525,11 +557,20 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       border-radius: 6px;
     }
 
+    .page-accordion-header .chevron {
+      transition: transform 0.25s ease;
+    }
+
+    .page-accordion-item.active .page-accordion-header .chevron {
+      transform: rotate(180deg);
+    }
+
     .page-accordion-body {
       padding: 1.65rem;
       display: none;
       border-top: 1px solid var(--border-warm);
       background: #FFFFFF;
+      box-sizing: border-box;
     }
 
     .page-accordion-item.active .page-accordion-body {
@@ -543,6 +584,10 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      width: 100%;
+      max-width: 380px;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .preview-card {
@@ -551,6 +596,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       border: 1px solid var(--border-warm);
       box-shadow: var(--shadow-card);
       overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .preview-header {
@@ -564,10 +611,14 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.5rem;
     }
 
     .preview-body {
-      padding: 1.5rem;
+      padding: 1.35rem;
+      box-sizing: border-box;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     /* Realistic Google Search SERP Mockup */
@@ -575,9 +626,11 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       background: #FFFFFF;
       border: 1px solid #DFE1E5;
       border-radius: 12px;
-      padding: 1.25rem 1.35rem;
+      padding: 1.15rem 1.25rem;
       box-shadow: 0 1px 6px rgba(32,33,36,0.06);
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .serp-header {
@@ -585,6 +638,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       align-items: center;
       gap: 0.65rem;
       margin-bottom: 0.35rem;
+      overflow: hidden;
     }
 
     .serp-favicon {
@@ -599,11 +653,13 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       font-size: 0.78rem;
       font-weight: bold;
       font-family: 'Fraunces', serif;
+      flex-shrink: 0;
     }
 
     .serp-source {
       display: flex;
       flex-direction: column;
+      min-width: 0;
     }
 
     .serp-domain {
@@ -611,22 +667,29 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       font-weight: 600;
       color: #202124;
       line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .serp-url {
       font-size: 0.72rem;
       color: #4D5156;
       line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .serp-title {
       font-size: 1.15rem;
       color: #1A0DAB;
       cursor: pointer;
-      line-height: 1.3;
+      line-height: 1.35;
       margin-top: 0.45rem;
       font-weight: 400;
       word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .serp-title:hover {
@@ -639,6 +702,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       line-height: 1.5;
       margin-top: 0.45rem;
       word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     /* Social Card Mockup */
@@ -649,6 +713,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       overflow: hidden;
       margin-top: 1.25rem;
       box-shadow: var(--shadow-sm);
+      box-sizing: border-box;
     }
 
     .social-card-img {
@@ -662,6 +727,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     .social-card-meta {
       padding: 0.95rem 1.15rem;
       background: #F8F9FA;
+      box-sizing: border-box;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .social-card-domain {
@@ -673,11 +741,12 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     }
 
     .social-card-title {
-      font-size: 0.94rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: #050505;
       margin-top: 3px;
-      line-height: 1.3;
+      line-height: 1.35;
+      word-break: break-word;
     }
 
     /* Floating Save Bar */
@@ -685,16 +754,16 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      z-index: 1000;
+      z-index: 100;
     }
 
     .btn-save-primary {
       background: var(--text-espresso);
       color: #FFFFFF;
       border: none;
-      padding: 1.1rem 2.25rem;
+      padding: 1rem 2rem;
       border-radius: 999px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       font-family: inherit;
       cursor: pointer;
@@ -723,6 +792,12 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     }
 
     @media (max-width: 900px) {
+      .admin-sidebar {
+        transform: translateX(-100%);
+      }
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
       .admin-main-wrapper {
         margin-left: 0;
         width: 100%;
@@ -737,11 +812,23 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       .topbar-heading {
         font-size: 1.35rem;
       }
+      .quick-nav-pills {
+        padding: 0.4rem;
+        gap: 0.4rem;
+        margin-bottom: 1.25rem;
+      }
+      .pill-btn {
+        padding: 0.45rem 0.85rem;
+        font-size: 0.78rem;
+      }
       .form-grid {
         grid-template-columns: minmax(0, 1fr) !important;
       }
       .seo-card {
         padding: 1.25rem;
+      }
+      .page-accordion-body {
+        padding: 1.15rem;
       }
       .floating-save-bar {
         bottom: 1rem;
@@ -751,7 +838,6 @@ if (session_status() === PHP_SESSION_ACTIVE) {
         padding: 0.85rem 1.5rem;
         font-size: 0.9rem;
       }
-    }
     }
   </style>
 </head>

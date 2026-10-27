@@ -29,30 +29,10 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         $err = 'Security session expired. Please refresh and try again.';
     } else {
         $posted = $_POST['settings'] ?? [];
-        $postedPages = $_POST['pages'] ?? [];
 
         foreach ($posted as $key => $val) {
             $key = trim((string)$key);
             $val = is_string($val) ? trim($val) : $val;
-
-            // Sanitize GSC unique verification code if user pasted full HTML tag or quotes
-            if ($key === 'seo_google_site_verification' && is_string($val)) {
-                if (preg_match('/content=["\']([^"\']+)["\']/i', $val, $m)) {
-                    $val = $m[1];
-                }
-                $val = trim(strip_tags(str_replace(['"', "'"], '', $val)));
-            }
-            // Sanitize Bing unique verification code if user pasted full HTML tag or quotes
-            if ($key === 'seo_bing_site_verification' && is_string($val)) {
-                if (preg_match('/content=["\']([^"\']+)["\']/i', $val, $m)) {
-                    $val = $m[1];
-                }
-                $val = trim(strip_tags(str_replace(['"', "'"], '', $val)));
-            }
-            // Sanitize Meta Pixel if user pasted script
-            if ($key === 'seo_meta_pixel_id' && is_string($val) && preg_match('/[0-9]{8,20}/', $val, $m)) {
-                $val = $m[0];
-            }
 
             // Determine type casting
             $type = 'string';
@@ -70,29 +50,11 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 $val = in_array($val, ['stackable', 'exclusive'], true) ? $val : 'stackable';
             }
 
-            $group = str_starts_with($key, 'seo_') ? 'seo' : 'system';
-            Setting::set($key, $val, $group, $type);
-        }
-
-        // Save Per-Page SEO data (JSON array)
-        if (!empty($postedPages) && is_array($postedPages)) {
-            $cleanPages = [];
-            foreach ($postedPages as $pageKey => $pData) {
-                if (!is_array($pData)) continue;
-                $cleanPages[$pageKey] = [
-                    'title' => trim((string)($pData['title'] ?? '')),
-                    'description' => trim((string)($pData['description'] ?? '')),
-                    'keywords' => trim((string)($pData['keywords'] ?? '')),
-                    'og_image' => trim((string)($pData['og_image'] ?? '')),
-                    'robots' => trim((string)($pData['robots'] ?? 'index, follow')),
-                    'path' => trim((string)($pData['path'] ?? '')),
-                ];
-            }
-            Setting::set('seo_pages_data', json_encode($cleanPages, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE), 'seo', 'json');
+            Setting::set($key, $val, 'system', $type);
         }
 
         \App\Services\AppDataService::clearCache();
-        AuditLog::log($staff['id'], 'cms_settings_updated', 'settings', null, ['keys_count' => count($posted), 'pages_count' => count($postedPages)]);
+        AuditLog::log($staff['id'], 'cms_settings_updated', 'settings', null, ['keys_count' => count($posted)]);
         $msg = 'Website CMS content & system configurations saved successfully! Changes reflect on the website immediately.';
     }
 }
@@ -107,10 +69,6 @@ foreach ($allSettings as $s) {
 // Read active coupons and automated promotional offers
 $couponsList = Coupon::all('id ASC');
 $offersList = Offer::all('priority ASC, id ASC');
-
-// Read full SEO & Tracking configurations
-$allSeo = \App\Services\AppDataService::getAllSeoConfig();
-$seoPages = $allSeo['pages'] ?? [];
 
 $csrfToken = Security::generateCsrfToken();
 $activeNav = 'cms';
@@ -1060,156 +1018,22 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
             </div>
 
-            <!-- 8. SEO, Webmaster & Marketing Tracking -->
-            <div class="cms-card" id="seo-section">
-              <div class="section-header">
-                <div class="section-icon" style="color:var(--accent-sky-deep);">
+            <!-- Dedicated SEO & Webmaster Studio Banner -->
+            <div style="background:var(--bg-surface); border:1px solid var(--border-warm); border-radius:var(--radius-lg); padding:1.5rem 2rem; margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.25rem; box-shadow:var(--shadow-card);">
+              <div style="display:flex; align-items:center; gap:1rem;">
+                <div style="width:44px; height:44px; border-radius:12px; background:var(--accent-sky-soft); color:var(--accent-sky-deep); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 </div>
-                <div style="flex:1;">
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h2 class="section-title">SEO, Webmaster &amp; Marketing Tracking</h2>
-                    <a href="/admin/seo.php" target="_blank" style="font-size:0.75rem; color:var(--accent-sky-deep); font-weight:700; text-decoration:none; background:var(--bg-cream); border:1px solid var(--border-warm); padding:4px 10px; border-radius:6px;">
-                      Open Full Studio &amp; SERP Simulator ↗
-                    </a>
+                <div>
+                  <div style="font-family:'Fraunces',serif; font-weight:700; font-size:1.15rem; color:var(--text-espresso);">SEO, SERP Simulator &amp; Webmaster Tracking</div>
+                  <div style="font-size:0.82rem; color:var(--text-muted); margin-top:3px;">
+                    Google Search Console, Bing Webmaster, GA4, Meta Pixel, and Per-Page Search Metadata are managed in the dedicated SEO Studio.
                   </div>
-                  <div class="section-desc">Control Google Search Console, Google Analytics (GA4), Bing, Meta Pixel, and Per-Page Search Metadata directly from here.</div>
                 </div>
               </div>
-
-              <!-- Subsection: Webmaster Verifications & Analytics -->
-              <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-espresso); margin:0 0 0.85rem; padding-bottom:0.4rem; border-bottom:1px dashed var(--border-warm);">
-                Webmaster Verifications &amp; Tracking Integrations
-              </h3>
-
-              <div class="form-grid" style="margin-bottom:1.5rem;">
-                <div class="form-group" style="background:#F9FBFD; border:1px solid rgba(66, 133, 244, 0.2); border-radius:10px; padding:1rem;">
-                  <label style="color:#1A73E8; font-weight:700;">Google Search Console Unique Code</label>
-                  <input type="text" name="settings[seo_google_site_verification]" placeholder="e.g. 4bX8jQp9zM1_sK2wL8vN0pQ7rT3uY6" value="<?= e((string)($current['seo_google_site_verification'] ?? '')) ?>" oninput="cleanUniqueVerificationCode(this, 'gsc')" onblur="cleanUniqueVerificationCode(this, 'gsc')" style="background:#FFFFFF;">
-                  <span class="help-hint">Sirf Unique Code enter karein. Inserts <code>&lt;meta name="google-site-verification" content="..."&gt;</code></span>
-                </div>
-
-                <div class="form-group" style="background:#F7FBFD; border:1px solid rgba(0, 120, 212, 0.2); border-radius:10px; padding:1rem;">
-                  <label style="color:#0078D4; font-weight:700;">Bing Webmaster Unique Code (msvalidate.01)</label>
-                  <input type="text" name="settings[seo_bing_site_verification]" placeholder="e.g. A483E58D98C127D480BC4B4958309482" value="<?= e((string)($current['seo_bing_site_verification'] ?? '')) ?>" oninput="cleanUniqueVerificationCode(this, 'bing')" onblur="cleanUniqueVerificationCode(this, 'bing')" style="background:#FFFFFF;">
-                  <span class="help-hint">Sirf 32-character Unique Code enter karein. Inserts <code>&lt;meta name="msvalidate.01" content="..."&gt;</code></span>
-                </div>
-
-                <div class="form-group" style="background:#FAF8F5; border:1px solid var(--border-warm); border-radius:10px; padding:1rem;">
-                  <label style="color:var(--text-espresso);">Google Analytics 4 (GA4)</label>
-                  <input type="text" name="settings[seo_google_analytics_id]" placeholder="G-XXXXXXXXXX" value="<?= e((string)($current['seo_google_analytics_id'] ?? '')) ?>" style="background:#FFFFFF;">
-                  <span class="help-hint">Measurement ID. Injects official <code>gtag.js</code> tracking.</span>
-                </div>
-
-                <div class="form-group" style="background:#FAFBFD; border:1px solid rgba(24, 119, 242, 0.2); border-radius:10px; padding:1rem;">
-                  <label style="color:#1877F2;">Meta Pixel (Facebook Pixel)</label>
-                  <input type="text" name="settings[seo_meta_pixel_id]" placeholder="Pixel ID (e.g. 1234567890)" value="<?= e((string)($current['seo_meta_pixel_id'] ?? '')) ?>" style="background:#FFFFFF;">
-                  <span class="help-hint">Injects official <code>fbq('init')</code> script + noscript pixel.</span>
-                </div>
-              </div>
-
-              <!-- Subsection: Global SEO Metadata Defaults -->
-              <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-espresso); margin:0 0 0.85rem; padding-bottom:0.4rem; border-bottom:1px dashed var(--border-warm);">
-                Global Website SEO Defaults
-              </h3>
-
-              <div class="form-grid" style="margin-bottom:1.5rem;">
-                <div class="form-group" style="grid-column: 1 / -1;">
-                  <label>Global Site Title / Title Template</label>
-                  <input type="text" name="settings[seo_global_site_title]" value="<?= e((string)($current['seo_global_site_title'] ?? 'RiTiVerse | Heritage Cafe & Cultural Space · Vadodara, Gujarat')) ?>">
-                  <span class="help-hint">Default browser tab title and Google SERP main headline.</span>
-                </div>
-
-                <div class="form-group" style="grid-column: 1 / -1;">
-                  <label>Default Meta Description</label>
-                  <textarea name="settings[seo_global_meta_description]" rows="2"><?= e((string)($current['seo_global_meta_description'] ?? 'Experience warm hospitality, heritage architecture, and delicious homestyle cuisine at RiTiVerse, Vadodara, Gujarat.')) ?></textarea>
-                  <span class="help-hint">140–160 characters summary displayed under the link in search results.</span>
-                </div>
-
-                <div class="form-group">
-                  <label>Default Meta Keywords</label>
-                  <input type="text" name="settings[seo_global_meta_keywords]" value="<?= e((string)($current['seo_global_meta_keywords'] ?? 'RiTiVerse, RiTiVerse Cafe, Vadodara cafe, Best cafe in Vadodara, Gujarat cafe, Heritage cafe Vadodara')) ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>Canonical Base Domain</label>
-                  <input type="url" name="settings[seo_global_canonical_url]" value="<?= e((string)($current['seo_global_canonical_url'] ?? 'https://ritiverse.in')) ?>">
-                </div>
-
-                <div class="form-group">
-                  <label>Robots Indexing</label>
-                  <select name="settings[seo_global_robots]">
-                    <option value="index, follow" <?= (($current['seo_global_robots'] ?? 'index, follow') === 'index, follow') ? 'selected' : '' ?>>index, follow (Live Production - Recommended)</option>
-                    <option value="noindex, nofollow" <?= (($current['seo_global_robots'] ?? '') === 'noindex, nofollow') ? 'selected' : '' ?>>noindex, nofollow (Development / Staging Only)</option>
-                    <option value="noindex, follow" <?= (($current['seo_global_robots'] ?? '') === 'noindex, follow') ? 'selected' : '' ?>>noindex, follow (Do not index, follow links)</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Default Social Share (OG) Image</label>
-                  <input type="text" name="settings[seo_global_og_image]" value="<?= e((string)($current['seo_global_og_image'] ?? 'assets/images/cafe/hero-table.jpg')) ?>">
-                </div>
-              </div>
-
-              <!-- Subsection: Per-Page SEO Overrides -->
-              <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-espresso); margin:0 0 0.85rem; padding-bottom:0.4rem; border-bottom:1px dashed var(--border-warm);">
-                Per-Page SEO Overrides
-              </h3>
-              <p style="font-size:0.78rem; color:var(--text-muted); margin:0 0 1rem;">
-                Customize the specific Google Title and Meta Description for every individual public page:
-              </p>
-
-              <?php
-                $cmsPageList = [
-                    'home' => ['name' => 'Home Page', 'route' => '/'],
-                    'menu' => ['name' => 'Our Menu', 'route' => '/menu'],
-                    'about' => ['name' => 'About & Heritage', 'route' => '/about'],
-                    'events' => ['name' => 'Events & Gatherings', 'route' => '/events'],
-                    'gallery' => ['name' => 'Visual Diary Gallery', 'route' => '/gallery'],
-                    'contact' => ['name' => 'Contact & Hours', 'route' => '/contact'],
-                    'table' => ['name' => 'Digital Table Order', 'route' => '/table'],
-                ];
-              ?>
-
-              <div style="display:flex; flex-direction:column; gap:0.75rem;">
-                <?php foreach ($cmsPageList as $pKey => $pMeta): ?>
-                  <?php $pData = $seoPages[$pKey] ?? []; ?>
-                  <details style="background:var(--bg-cream); border:1px solid var(--border-warm); border-radius:10px; overflow:hidden;">
-                    <summary style="padding:0.85rem 1rem; cursor:pointer; font-weight:700; font-size:0.86rem; display:flex; justify-content:space-between; align-items:center; user-select:none; flex-wrap:wrap; gap:0.5rem;">
-                      <span><?= e($pMeta['name']) ?> <span style="font-family:monospace; font-size:0.75rem; color:var(--accent-sky-deep); background:var(--accent-sky-soft); padding:1px 6px; border-radius:4px; margin-left:6px;"><?= e($pMeta['route']) ?></span></span>
-                      <span style="font-size:0.72rem; color:var(--text-muted); font-weight:normal;">Click to edit ▾</span>
-                    </summary>
-                    <div style="padding:1rem; border-top:1px solid var(--border-warm); background:#FFFFFF;">
-                      <input type="hidden" name="pages[<?= e($pKey) ?>][path]" value="<?= e((string)($pData['path'] ?? ($pKey === 'home' ? '' : $pKey))) ?>">
-                      <div class="form-grid single-col" style="gap:0.85rem;">
-                        <div class="form-group">
-                          <label style="font-size:0.8rem;">Page Title Tag</label>
-                          <input type="text" name="pages[<?= e($pKey) ?>][title]" value="<?= e((string)($pData['title'] ?? '')) ?>" placeholder="Leave blank to use global site title">
-                        </div>
-                        <div class="form-group">
-                          <label style="font-size:0.8rem;">Meta Description</label>
-                          <textarea name="pages[<?= e($pKey) ?>][description]" rows="2" placeholder="Leave blank to use global description"><?= e((string)($pData['description'] ?? '')) ?></textarea>
-                        </div>
-                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem;">
-                          <div class="form-group">
-                            <label style="font-size:0.8rem;">Keywords</label>
-                            <input type="text" name="pages[<?= e($pKey) ?>][keywords]" value="<?= e((string)($pData['keywords'] ?? '')) ?>">
-                          </div>
-                          <div class="form-group">
-                            <label style="font-size:0.8rem;">Robots</label>
-                            <select name="pages[<?= e($pKey) ?>][robots]">
-                              <option value="index, follow" <?= (($pData['robots'] ?? 'index, follow') === 'index, follow') ? 'selected' : '' ?>>index, follow</option>
-                              <option value="noindex, follow" <?= (($pData['robots'] ?? '') === 'noindex, follow') ? 'selected' : '' ?>>noindex, follow</option>
-                              <option value="noindex, nofollow" <?= (($pData['robots'] ?? '') === 'noindex, nofollow') ? 'selected' : '' ?>>noindex, nofollow</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </details>
-                <?php endforeach; ?>
-              </div>
-
+              <a href="/admin/seo.php" class="btn-refresh-pill" style="font-size:0.85rem; padding:0.65rem 1.35rem; font-weight:700; color:var(--accent-sky-deep); background:var(--bg-cream);">
+                <span>Open SEO &amp; Tracking Studio →</span>
+              </a>
             </div>
 
           </div>
@@ -1229,24 +1053,6 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     </main>
 
   </div>
-
-  <script>
-    function cleanUniqueVerificationCode(input, type) {
-      if (!input || !input.value) return;
-      let v = input.value.trim();
-      if (type === 'gsc') {
-        const match = v.match(/content=["']([^"']+)["']/i);
-        if (match) v = match[1];
-      } else if (type === 'bing') {
-        const match = v.match(/content=["']([^"']+)["']/i);
-        if (match) v = match[1];
-      }
-      v = v.replace(/<[^>]*>?/gm, '').replace(/["']/g, '').trim();
-      if (input.value !== v) {
-        input.value = v;
-      }
-    }
-  </script>
 
 </body>
 </html>
