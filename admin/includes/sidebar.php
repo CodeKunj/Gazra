@@ -277,10 +277,9 @@ $staffUser = $staff ?? (\App\Services\AuthService::user() ?? ['name' => 'Staff M
   .admin-sidebar-backdrop.open {
     display: block !important;
   }
-  .admin-main {
+  .admin-main, .admin-main-wrapper {
     margin-left: 0 !important;
     width: 100% !important;
-    padding: 1.25rem 1rem !important;
     box-sizing: border-box;
   }
 }
@@ -499,6 +498,7 @@ $staffUser = $staff ?? (\App\Services\AuthService::user() ?? ['name' => 'Staff M
       </svg>
       <span>Sign Out</span>
     </a>
+  </div>
 </aside>
 
 <script>

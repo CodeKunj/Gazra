@@ -135,6 +135,11 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
     * { box-sizing: border-box; }
 
+    html, body {
+      max-width: 100vw;
+      overflow-x: clip;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -154,6 +159,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       display: flex;
       flex-direction: column;
       width: calc(100% - 260px);
+      max-width: calc(100% - 260px);
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     /* Top Sticky Action Bar */
@@ -279,9 +287,14 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     /* Two-Column Studio Layout */
     .studio-layout {
       display: grid;
-      grid-template-columns: 1fr 440px;
-      gap: 2.25rem;
+      grid-template-columns: minmax(0, 1fr) 420px;
+      gap: 2rem;
       align-items: start;
+      min-width: 0;
+    }
+
+    .form-sections {
+      min-width: 0;
     }
 
     /* Studio Card */
@@ -700,10 +713,12 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
     @media (max-width: 1200px) {
       .studio-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
       .preview-sidebar {
-        display: none;
+        position: static;
+        max-width: 100%;
+        margin-bottom: 2rem;
       }
     }
 
@@ -711,10 +726,32 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       .admin-main-wrapper {
         margin-left: 0;
         width: 100%;
+        max-width: 100%;
       }
       .seo-content-area {
         padding: 1.25rem 1rem 6rem;
       }
+      .admin-topbar {
+        padding: 1rem 1.25rem;
+      }
+      .topbar-heading {
+        font-size: 1.35rem;
+      }
+      .form-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      .seo-card {
+        padding: 1.25rem;
+      }
+      .floating-save-bar {
+        bottom: 1rem;
+        right: 1rem;
+      }
+      .btn-save-primary {
+        padding: 0.85rem 1.5rem;
+        font-size: 0.9rem;
+      }
+    }
     }
   </style>
 </head>

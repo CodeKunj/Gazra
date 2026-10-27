@@ -57,6 +57,10 @@ yarn-error.log*
 # Local Development & AI Workspace Scratch Files
 .aider*
 .gemini/
+.claude/
+.cursor/
+.windsurf/
+.antigravity/
 *.tmp
 *.temp
 
@@ -65,10 +69,22 @@ yarn-error.log*
 database/*.sqlite
 database/*.sqlite-journal
 
+# GSD (Get Stuff Done), Agents & Plugin Framework
+.agent/
 .agents/
+.gsd/
+GSD-STYLE.md
+PROJECT_RULES.md
+VERSION
+adapters/
+model_capabilities.yaml
+scripts/
+skills/
 skills-lock.json
-videos
-skills
+plugins/
+.plugins/
 
-menu 
+# Miscellaneous scratch & temporary files
+videos
+menu
 implementation_plan.md

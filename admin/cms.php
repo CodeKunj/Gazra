@@ -149,6 +149,11 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
     * { box-sizing: border-box; }
 
+    html, body {
+      max-width: 100vw;
+      overflow-x: clip;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -377,6 +382,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       display: flex;
       flex-direction: column;
       width: calc(100% - 260px);
+      max-width: calc(100% - 260px);
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     /* Top Action Bar */
@@ -391,11 +399,14 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       top: 0;
       z-index: 900;
       box-shadow: 0 2px 10px rgba(26, 20, 18, 0.02);
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .topbar-title-wrap {
       display: flex;
       flex-direction: column;
+      min-width: 0;
     }
 
     .topbar-heading {
@@ -419,10 +430,35 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       gap: 1rem;
     }
 
+    .btn-refresh-pill {
+      text-decoration: none;
+      background: var(--bg-cream);
+      border: 1px solid var(--border-warm);
+      color: var(--text-espresso);
+      padding: 0.55rem 1.15rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-refresh-pill:hover {
+      background: #FFFFFF;
+      border-color: var(--accent-sky);
+      color: var(--accent-sky-deep);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
     /* Content Area */
     .cms-content-area {
       padding: 2.25rem 2.5rem 6rem;
       flex: 1;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .toast-alert {
@@ -447,9 +483,14 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     /* Studio Layout */
     .studio-layout {
       display: grid;
-      grid-template-columns: 1fr 420px;
+      grid-template-columns: minmax(0, 1fr) 360px;
       gap: 2rem;
       align-items: start;
+      min-width: 0;
+    }
+
+    .form-sections {
+      min-width: 0;
     }
 
     /* Form Section Cards */
@@ -461,6 +502,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       padding: 2rem;
       margin-bottom: 2rem;
       transition: all 0.2s ease;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .cms-card:hover {
@@ -503,24 +546,27 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
     .form-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.25rem;
+      min-width: 0;
     }
 
     .form-grid.single-col {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
+      min-width: 0;
     }
 
     .form-group label {
       font-size: 0.82rem;
       font-weight: 600;
       color: var(--text-espresso);
+      word-break: break-word;
     }
 
     .form-group input, .form-group textarea, .form-group select {
@@ -533,6 +579,13 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       background: #FAFAFA;
       outline: none;
       transition: all 0.2s ease;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-group select {
+      text-overflow: ellipsis;
     }
 
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
@@ -545,15 +598,30 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       font-size: 0.74rem;
       color: var(--text-muted);
       line-height: 1.4;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .help-hint code {
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      white-space: normal;
+      background: rgba(26, 20, 18, 0.05);
+      padding: 2px 5px;
+      border-radius: 4px;
     }
 
     /* Live Preview Sticky Sidebar */
     .preview-sidebar {
       position: sticky;
-      top: 5rem;
+      top: 5.5rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      width: 100%;
+      max-width: 360px;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .preview-card {
@@ -562,6 +630,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       border: 1px solid var(--border-warm);
       box-shadow: var(--shadow-card);
       overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .preview-header {
@@ -570,23 +640,30 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       padding: 0.85rem 1.25rem;
       font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.5rem;
     }
 
     .preview-body {
-      padding: 1.5rem;
+      padding: 1.25rem;
+      box-sizing: border-box;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .preview-mock-hero {
       background: radial-gradient(circle at 10% 20%, rgba(107, 154, 196, 0.12) 0%, transparent 40%), var(--bg-cream);
       border-radius: 12px;
-      padding: 1.5rem;
+      padding: 1.25rem 1rem;
       text-align: center;
       border: 1px dashed var(--border-warm);
+      box-sizing: border-box;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .mock-badge {
@@ -597,47 +674,60 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       font-weight: 700;
       margin-bottom: 0.5rem;
       display: block;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .mock-title {
       font-family: 'Fraunces', serif;
-      font-size: 1.65rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--text-espresso);
       margin: 0;
-      line-height: 1.1;
+      line-height: 1.15;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .mock-tagline {
       font-family: 'Fraunces', serif;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-style: italic;
       color: var(--accent-terracotta);
       margin-top: 0.25rem;
       display: block;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.3;
     }
 
     .mock-btn {
       display: inline-block;
-      margin-top: 1rem;
+      margin-top: 0.85rem;
       background: var(--text-espresso);
       color: #FFFFFF;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       padding: 0.5rem 1rem;
       border-radius: 999px;
+      word-break: break-word;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .preview-quote-box {
       margin-top: 1rem;
-      padding: 1rem;
+      padding: 0.85rem 1rem;
       background: var(--bg-cream);
       border-radius: 10px;
       font-family: 'Fraunces', serif;
       font-style: italic;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       color: var(--text-espresso);
       border-left: 3px solid var(--accent-terracotta);
+      word-break: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
     }
 
     /* Floating Save Bar */
@@ -652,9 +742,9 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       background: var(--text-espresso);
       color: #FFFFFF;
       border: none;
-      padding: 1.1rem 2.25rem;
+      padding: 1rem 2rem;
       border-radius: 999px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       font-family: inherit;
       cursor: pointer;
@@ -673,10 +763,12 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
     @media (max-width: 1200px) {
       .studio-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
       .preview-sidebar {
-        display: none;
+        position: static;
+        max-width: 100%;
+        margin-bottom: 2rem;
       }
     }
 
@@ -690,6 +782,30 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       .admin-main-wrapper {
         margin-left: 0;
         width: 100%;
+        max-width: 100%;
+      }
+      .cms-content-area {
+        padding: 1.25rem 1rem 6rem;
+      }
+      .admin-topbar {
+        padding: 1rem 1.25rem;
+      }
+      .topbar-heading {
+        font-size: 1.35rem;
+      }
+      .form-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      .cms-card {
+        padding: 1.25rem;
+      }
+      .floating-save-bar {
+        bottom: 1rem;
+        right: 1rem;
+      }
+      .btn-save-primary {
+        padding: 0.85rem 1.5rem;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -941,10 +1057,10 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                   <label>Promotional Stacking Policy</label>
                   <select name="settings[promo_stacking_mode]">
                     <option value="stackable" <?= (($current['promo_stacking_mode'] ?? 'stackable') === 'stackable') ? 'selected' : '' ?>>
-                      Stackable Mode (Recommended: Automated Happy Hours & Sourdough Combos combine with Coupon Codes)
+                      Stackable Mode (Combos & Happy Hours combine with Coupon Codes)
                     </option>
                     <option value="exclusive" <?= (($current['promo_stacking_mode'] ?? 'stackable') === 'exclusive') ? 'selected' : '' ?>>
-                      Exclusive Mode (Margin Protection: Automated Happy Hours & Combos block Coupon Codes from stacking)
+                      Exclusive Mode (Happy Hours & Combos block Coupon Codes)
                     </option>
                   </select>
                   <span class="help-hint">Controls how the authoritative cart evaluator applies multiple promotions at checkout.</span>
@@ -966,7 +1082,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                       $daysText = !empty($sched['days']) ? implode(', ', array_slice($sched['days'], 0, 4)) . (count($sched['days']) > 4 ? '...' : '') : 'Everyday';
                       $timeText = (!empty($sched['start_time']) && !empty($sched['end_time'])) ? ($sched['start_time'] . ' - ' . $sched['end_time']) : 'All Day';
                     ?>
-                    <div style="background:var(--bg-cream); border:1px solid var(--border-warm); border-radius:12px; padding:0.9rem 1.15rem; display:flex; justify-content:space-between; align-items:center;">
+                    <div style="background:var(--bg-cream); border:1px solid var(--border-warm); border-radius:12px; padding:0.9rem 1.15rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.6rem;">
                       <div>
                         <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
                           <span style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; padding:2px 8px; border-radius:4px; background:<?= $off['type'] === 'happy_hour' ? 'rgba(107, 154, 196, 0.2)' : 'rgba(201, 106, 82, 0.18)' ?>; color:<?= $off['type'] === 'happy_hour' ? '#3B6A8F' : '#A74A34' ?>;">
@@ -1010,7 +1126,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                         ? ($cp['value'] . '% Off (Capped at ₹' . ($cp['max_discount_paise'] / 100) . ')')
                         : ('Flat ₹' . $cp['value'] . ' Off');
                     ?>
-                    <div style="background:#FFFFFF; border:1px solid var(--border-warm); border-radius:12px; padding:0.9rem 1.15rem; display:flex; justify-content:space-between; align-items:center;">
+                    <div style="background:#FFFFFF; border:1px solid var(--border-warm); border-radius:12px; padding:0.9rem 1.15rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.6rem;">
                       <div>
                         <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
                           <span style="font-family:monospace; font-weight:800; font-size:0.92rem; background:rgba(26,20,18,0.06); padding:2px 8px; border-radius:6px; letter-spacing:0.05em; color:var(--text-espresso);">
@@ -1191,7 +1307,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                 <?php foreach ($cmsPageList as $pKey => $pMeta): ?>
                   <?php $pData = $seoPages[$pKey] ?? []; ?>
                   <details style="background:var(--bg-cream); border:1px solid var(--border-warm); border-radius:10px; overflow:hidden;">
-                    <summary style="padding:0.85rem 1rem; cursor:pointer; font-weight:700; font-size:0.86rem; display:flex; justify-content:space-between; align-items:center; user-select:none;">
+                    <summary style="padding:0.85rem 1rem; cursor:pointer; font-weight:700; font-size:0.86rem; display:flex; justify-content:space-between; align-items:center; user-select:none; flex-wrap:wrap; gap:0.5rem;">
                       <span><?= e($pMeta['name']) ?> <span style="font-family:monospace; font-size:0.75rem; color:var(--accent-sky-deep); background:var(--accent-sky-soft); padding:1px 6px; border-radius:4px; margin-left:6px;"><?= e($pMeta['route']) ?></span></span>
                       <span style="font-size:0.72rem; color:var(--text-muted); font-weight:normal;">Click to edit ▾</span>
                     </summary>
@@ -1206,7 +1322,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                           <label style="font-size:0.8rem;">Meta Description</label>
                           <textarea name="pages[<?= e($pKey) ?>][description]" rows="2" placeholder="Leave blank to use global description"><?= e((string)($pData['description'] ?? '')) ?></textarea>
                         </div>
-                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem;">
                           <div class="form-group">
                             <label style="font-size:0.8rem;">Keywords</label>
                             <input type="text" name="pages[<?= e($pKey) ?>][keywords]" value="<?= e((string)($pData['keywords'] ?? '')) ?>">
