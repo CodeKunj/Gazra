@@ -1166,11 +1166,15 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                       <span class="serp-url" id="serp_url">https://ritiverse.in</span>
                     </div>
                   </div>
+                  <?php
+                    $initialPreviewTitle = !empty($pages['home']['title']) ? (string)$pages['home']['title'] : (string)($global['site_title'] ?? 'RiTiVerse | Heritage Cafe & Cultural Space · Vadodara, Gujarat');
+                    $initialPreviewDesc = !empty($pages['home']['description']) ? (string)$pages['home']['description'] : (string)($global['meta_description'] ?? 'Experience warm hospitality, heritage architecture, and delicious homestyle cuisine at RiTiVerse, Vadodara, Gujarat.');
+                  ?>
                   <div class="serp-title" id="serp_title">
-                    <?= e((string)($pages['home']['title'] ?? $global['site_title'])) ?>
+                    <?= e($initialPreviewTitle) ?>
                   </div>
                   <div class="serp-snippet" id="serp_snippet">
-                    <?= e((string)($pages['home']['description'] ?? $global['meta_description'])) ?>
+                    <?= e($initialPreviewDesc) ?>
                   </div>
                 </div>
 
@@ -1183,7 +1187,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
                   <img id="social_img" src="<?= e($initialSrc) ?>" class="social-card-img" alt="Social Preview" onerror="this.onerror=null; this.src='/assets/images/cafe/hero-table.jpg';">
                   <div class="social-card-meta">
                     <div class="social-card-domain" id="social_domain">ritiverse.in</div>
-                    <div class="social-card-title" id="social_title"><?= e((string)($pages['home']['title'] ?? $global['site_title'])) ?></div>
+                    <div class="social-card-title" id="social_title"><?= e($initialPreviewTitle) ?></div>
                   </div>
                 </div>
 
@@ -1281,7 +1285,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
       let domainName = 'ritiverse.in';
       try {
-        const u = new URL(baseCanonical);
+        const testUrl = (baseCanonical.startsWith('http://') || baseCanonical.startsWith('https://')) ? baseCanonical : ('https://' + baseCanonical);
+        const u = new URL(testUrl);
         domainName = u.hostname;
       } catch (e) {}
 
@@ -1304,8 +1309,10 @@ if (session_status() === PHP_SESSION_ACTIVE) {
       // Update char counts
       const titleLen = globalTitle.length;
       const descLen = globalDesc.length;
-      document.getElementById('title_char_count').textContent = titleLen + ' chars';
-      document.getElementById('desc_char_count').textContent = descLen + ' chars';
+      const titleEl = document.getElementById('title_char_count');
+      if (titleEl) titleEl.textContent = titleLen + ' chars';
+      const descEl = document.getElementById('desc_char_count');
+      if (descEl) descEl.textContent = descLen + ' chars';
     }
 
     // Automatically clean full HTML meta tags to keep ONLY the unique token/code
